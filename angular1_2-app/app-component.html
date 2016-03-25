@@ -1,0 +1,45 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+
+<dom-module id="angular-app">
+
+    <template>
+
+        <div id="myAppId">
+            <div ng-controller="MainController as MainController">
+                <h1>Angular app 1</h1>
+                <p>The version of this app is {[{MainController.versionNumber}]}</p>
+                <p>Name of controller : {[{MainController.name}]}</p>
+            </div>
+
+            <script>
+                angular.module('myApp', [])
+                        .config(function($interpolateProvider){
+                            $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+                        })
+                        .controller('MainController', function () {
+                            var ctrl = this;
+                            ctrl.versionNumber = angular.version;
+                            ctrl.name = "MainCtrl";
+                        });
+
+                var appDiv = document.getElementById("myAppId");
+                angular.element(appDiv).ready(function() {
+                    angular.bootstrap(angular.element(appDiv), ['myApp']);
+                });
+                console.log('angular version: ' + angular.version.full);
+            </script>
+        </div>
+
+    </template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.29/angular.js"></script>
+    <!--<script src="bower_components/angular/angular.js"></script>-->
+    <script>
+        Polymer({
+            is: 'angular-app'
+        });
+    </script>
+
+</dom-module>
+

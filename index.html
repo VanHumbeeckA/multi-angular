@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Polymer</title>
+    <link rel="import" href="angular1_2-app/app-component.html">
+    <link rel="import" href="angular1_4-app/app-component.html">
+</head>
+<body unresolved>
+
+<template is="dom-bind" id="app">
+    <angular-app id="angularApp"></angular-app>
+</template>
+
+<template is="dom-bind" id="app2">
+    <angular-app-new id="angularAppNew"></angular-app-new>
+</template>
+
+
+<script>
+    (function(document) {
+        var app = document.querySelector('#app2');
+        // The dom-change event signifies when the template has stamped its DOM.
+        app.addEventListener('dom-change', function () {
+            document.querySelector('body').removeAttribute('unresolved');
+        });
+    })(document);
+</script>
+</body>
+</html>
